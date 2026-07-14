@@ -1,1 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pasalo Cars | Premium Assume Balance Cars</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    /* --- CSS RESET & VARIABLES --- */
+    :root {
+      --primary: #2563eb;
+      --primary-hover: #1d4ed8;
+      --bg-dark: #0f172a;
+      --bg-light: #f8fafc;
+      --text-dark: #1e293b;
+      --text-muted: #64748b;
+      --card-bg: #ffffff;
+      --border-color: #e2e8f0;
+      --success: #10b981;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-light);
+      color: var(--text-dark);
+      line-height: 1.6;
+    }
+
+    /* --- NAVIGATION --- */
+    header {
+      background: var(--card-bg);
+      border-bottom: 1px solid var(--border-color);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-weight: 800;
+      font-size: 1.5rem;
+      color: var(--primary);
+      text-decoration: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text-dark);
+      font-weight: 600;
+      margin-left: 1.5rem;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--primary);
+    }
+
+    /* --- HERO SECTION --- */
+    .hero {
+      background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+      color: white;
+      padding: 5rem 2rem;
+      text-align: center;
+    }
+
+    .hero-content {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .hero h1 {
+      font-size: 3rem;
+      font-weight: 800;
+      margin-bottom: 1rem;
+      line-height: 1.2;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      color: #cbd5e1;
+      margin-bottom: 2rem;
+    }
+
+    .btn-primary {
+      background-color: var(--primary);
+      color: white;
+      padding: 0.8rem 1.8rem;
+      border: none;
+      border-radius: 8px;
+      font-weight: 700;
+      text-decoration: none;
+      cursor: pointer;
+      display: inline-block;
+      transition: background 0.2s;
+    }
+
+    .btn-primary:hover {
+      background-color: var(--primary-hover);
+    }
+
+    /* --- FILTERS SECTION --- */
+    .filter-container {
+      max-width: 1200px;
+      margin: 3rem auto 1.5rem;
+      padding: 0 2rem;
+    }
+
+    .filter-title {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      font-weight: 700;
+    }
+
+    .filter-buttons {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .filter-btn {
+      background-color: white;
+      border: 1px solid var(--border-color);
+      padding: 0.6rem 1.2rem;
+      border-radius: 20px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.2s;
+    }
+
+    .filter-btn.active, .filter-btn:hover {
+      background-color: var(--primary);
+      color: white;
+      border-color: var(--primary);
+    }
+
+    /* --- CARDS GRID --- */
+    .units-section {
+      max-width: 1200px;
+      margin: 0 auto 5rem;
+      padding: 0 2rem;
+    }
+
+    .units-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 2rem;
+    }
+
+    /* --- INDIVIDUAL VEHICLE CARD --- */
+    .unit-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      overflow: hidden;
+      position: relative;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .unit-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Placeholder image styling */
+    .unit-image-placeholder {
+      height: 200px;
+      background: #e2e8f0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    .unit-details {
+      padding: 1.5rem;
+    }
+
+    .unit-brand {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: var(--primary);
+      letter-spacing: 1px;
+    }
+
+    .unit-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin: 0.2rem 0 0.8rem;
+    }
+
+    .unit-tag {
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      background-color: var(--bg-dark);
+      color: white;
+      padding: 0.3rem 0.8rem;
+      font-size: 0.75rem;
+      font-weight: 700;
+      border-radius: 20px;
+    }
+
+    .verified-badge {
+      display: inline-flex;
+      align-items: center;
+      color: var(--success);
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .price-info {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-top: 1rem;
+    }
+
+    .favorite-btn {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: rgba(255, 255, 255, 0.85);
+      border: none;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .favorite-btn svg {
+      width: 20px;
+      height: 20px;
+      color: var(--text-muted);
+      transition: fill 0.2s, color 0.2s;
+    }
+
+    .favorite-btn.active svg {
+      fill: #ef4444;
+      color: #ef4444;
+    }
+
+    /* --- CONTACT SECTION --- */
+    .contact {
+      background: white;
+      border-top: 1px solid var(--border-color);
+      padding: 5rem 2rem;
+    }
+
+    .contact-container {
+      max-width: 600px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .contact h2 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .contact p {
+      color: var(--text-muted);
+      margin-bottom: 2rem;
+    }
+
+    .form-group {
+      margin-bottom: 1.2rem;
+      text-align: left;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 0.4rem;
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 0.8rem;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      font-size: 1rem;
+    }
+
+    /* --- FOOTER --- */
+    footer {
+      background: var(--bg-dark);
+      color: #94a3b8;
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+    }
+
+    /* Responsive Grid */
+    @media (max-width: 768px) {
+      .hero h1 { font-size: 2.2rem; }
+      .nav-links { display: none; } /* Pwedeng gawan ng hamburger menu sa susunod */
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER / NAVIGATION -->
+  <header>
+    <div class="nav-container">
+      <a href="#" class="logo">Pasalo Cars</a>
+      <nav class="nav-links">
+        <a href="#inventory">Available Cars</a>
+        <a href="#contact">Contact Us</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO SECTION -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Premium Assume Balance Vehicles</h1>
+      <p>Salo-Bukas! Get your dream car without the hassle of bank approvals. Process your assume balance easily and safely with our verified units.</p>
+      <a href="#inventory" class="btn-primary">View Inventory</a>
+    </div>
+  </section>
+
+  <!-- INTERACTIVE FILTERS -->
+  <div class="filter-container" id="inventory">
+    <h2 class="filter-title">Browse Our Vehicles</h2>
+    <div class="filter-buttons">
+      <button class="filter-btn active" onclick="filterType('All')">All Units</button>
+      <button class="filter-btn" onclick="filterType('SUV')">SUV</button>
+      <button class="filter-btn" onclick="filterType('Pickup')">Pickups</button>
+      <button class="filter-btn" onclick="filterType('Sedan')">Sedans</button>
+    </div>
+  </div>
+
+  <!-- CARS GRID SECTION -->
+  <section class="units-section">
+    <div class="units-grid">
+      
+      <!-- Card 1: Mitsubishi Montero -->
+      <div class="unit-card" data-brand="Mitsubishi" data-monthly="30k-40k" data-type="SUV" data-price="35000" data-slug="montero-sport">
+        <div class="unit-image-placeholder">🚗 Mitsubishi Montero Sport Image</div>
+        <div class="unit-tag">Assume Balance</div>
+        <div class="unit-details">
+          <span class="unit-brand">Mitsubishi</span>
+          <h3 class="unit-title">Montero Sport</h3>
+          <div class="verified-badge">✓ Verified Unit</div>
+          <div class="price-info">₱35,000 / month</div>
+        </div>
+        <button class="favorite-btn" data-slug="montero-sport" aria-label="Add to Favorites" onclick="toggleFavorite(this)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Card 2: Ford Ranger -->
+      <div class="unit-card" data-brand="Ford" data-monthly="20k-30k" data-type="Pickup" data-price="28500" data-slug="ranger-wildtrak">
+        <div class="unit-image-placeholder">🛻 Ford Ranger Wildtrak Image</div>
+        <div class="unit-tag">Assume Balance</div>
+        <div class="unit-details">
+          <span class="unit-brand">Ford</span>
+          <h3 class="unit-title">Ranger Wildtrak</h3>
+          <div class="verified-badge">✓ Verified Unit</div>
+          <div class="price-info">₱28,500 / month</div>
+        </div>
+        <button class="favorite-btn" data-slug="ranger-wildtrak" aria-label="Add to Favorites" onclick="toggleFavorite(this)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Card 3: Toyota Vios -->
+      <div class="unit-card" data-brand="Toyota" data-monthly="under-20k" data-type="Sedan" data-price="16200" data-slug="vios-xe">
+        <div class="unit-image-placeholder">🚗 Toyota Vios XE Image</div>
+        <div class="unit-tag">Assume Balance</div>
+        <div class="unit-details">
+          <span class="unit-brand">Toyota</span>
+          <h3 class="unit-title">Vios XE</h3>
+          <div class="verified-badge">✓ Verified Unit</div>
+          <div class="price-info">₱16,200 / month</div>
+        </div>
+        <button class="favorite-btn" data-slug="vios-xe" aria-label="Add to Favorites" onclick="toggleFavorite(this)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Card 4: Toyota Hilux -->
+      <div class="unit-card" data-brand="Toyota" data-monthly="40k-plus" data-type="Pickup" data-price="43232" data-slug="hilux-grs">
+        <div class="unit-image-placeholder">🛻 Toyota Hilux GR Sport Image</div>
+        <div class="unit-tag">Assume Balance</div>
+        <div class="unit-details">
+          <span class="unit-brand">Toyota</span>
+          <h3 class="unit-title">Hilux GR Sport</h3>
+          <div class="verified-badge">✓ Verified Unit</div>
+          <div class="price-info">₱43,232 / month</div>
+        </div>
+        <button class="favorite-btn" data-slug="hilux-grs" aria-label="Add to Favorites" onclick="toggleFavorite(this)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+          </svg>
+        </button>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CONTACT FORM SECTION -->
+  <section class="contact" id="contact">
+    <div class="contact-container">
+      <h2>Inquire About a Unit</h2>
+      <p>Send us a message and our team will assist you with the transfer requirements.</p>
+      <form onsubmit="handleSubmit(event)">
+        <div class="form-group">
+          <label for="name">Your Name</label>
+          <input type="text" id="name" class="form-control" required placeholder="Juan Dela Cruz">
+        </div>
+        <div class="form-group">
+          <label for="contact-num">Contact Number</label>
+          <input type="tel" id="contact-num" class="form-control" required placeholder="0917XXXXXXX">
+        </div>
+        <div class="form-group">
+          <label for="message">Message</label>
+          <textarea id="message" class="form-control" rows="4" placeholder="I am interested in the Toyota Hilux GR Sport..."></textarea>
+        </div>
+        <button type="submit" class="btn-primary" style="width: 100%;">Send Inquiry</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>&copy; 2026 Pasalo Cars Philippines. All rights reserved.</p>
+  </footer>
+
+  <!-- INTERACTIVE JAVASCRIPT -->
+  <script>
+    // 1. Filter Feature
+    function filterType(type) {
+      // Toggle active filter button style
+      const buttons = document.querySelectorAll('.filter-btn');
+      buttons.forEach(btn => {
+        if (btn.innerText.toLowerCase().includes(type.toLowerCase()) || (type === 'All' && btn.innerText === 'All Units')) {
+          btn.classList.add('active');
+        } else {
+          btn.classList.remove('active');
+        }
+      });
+
+      // Filter the actual card units
+      const cards = document.querySelectorAll('.unit-card');
+      cards.forEach(card => {
+        const cardType = card.getAttribute('data-type');
+        if (type === 'All' || cardType === type) {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    // 2. Add to Favorites (Toggle Heart Icon)
+    function toggleFavorite(button) {
+      button.classList.toggle('active');
+    }
+
+    // 3. Simple Form Submit
+    function handleSubmit(event) {
+      event.preventDefault();
+      alert('Salamat! Natanggap namin ang iyong detalye. Tatawagan ka namin sa lalong madaling panahon.');
+      document.querySelector('form').reset();
+    }
+  </script>
+</body>
+</html>
 
