@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stagebound — Find Your Next Show</title>
+<meta name="description" content="Stagebound tracks the tours worth chasing and points you to the best place to buy tickets.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="topbar">
+  <a href="index.html" class="wordmark">STAGEBOUND</a>
+  <nav class="topnav">
+    <a href="#shows">Shows</a>
+    <a href="#dispatch">Dispatch</a>
+    <a href="#about">About</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="hero-stub">
+    <span class="hero-eyebrow">Admit One</span>
+    <h1 class="hero-title">Every tour<br>worth chasing.<br><span class="hero-title-accent">Nowhere else.</span></h1>
+    <p class="hero-sub">We track on-sale dates, price drops, and resale spikes across every major tour — then send you straight to the seller with the best seats left.</p>
+    <a href="#shows" class="hero-cta">See tonight's lineup ↓</a>
+  </div>
+  <div class="hero-perf" aria-hidden="true"></div>
+</section>
+
+<section class="ticker" aria-hidden="true">
+  <div class="ticker-track" id="tickerTrack"></div>
+</section>
+
+<main>
+
+  <section id="shows" class="shows-section">
+    <div class="section-head">
+      <h2>On Sale Now</h2>
+      <div class="filter-row" id="genreFilters"></div>
+    </div>
+    <div class="stub-grid" id="stubGrid">
+      <!-- event stubs injected here -->
+    </div>
+  </section>
+
+  <section id="dispatch" class="dispatch-section">
+    <div class="section-head">
+      <h2>The Dispatch</h2>
+      <p class="section-sub">Field notes on buying smart and spotting scalpers.</p>
+    </div>
+    <div class="post-list" id="postList">
+      <!-- posts injected here -->
+    </div>
+  </section>
+
+  <section id="about" class="about-section">
+    <h2>How Stagebound Works</h2>
+    <p>Stagebound is an independent tour tracker. When you buy tickets through a link on this site, we may earn a commission from our partner sellers — at no extra cost to you. We only link to sellers we've vetted for legitimacy. This helps keep Stagebound free and ad-light.</p>
+    <p><a href="affiliate-disclosure.html">Read our full affiliate disclosure →</a></p>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div>
+    <span class="wordmark small">STAGEBOUND</span>
+    <p>Tour dates, honestly tracked.</p>
+  </div>
+  <div class="footer-links">
+    <a href="affiliate-disclosure.html">Affiliate Disclosure</a>
+    <a href="#about">About</a>
+    <a href="#shows">Shows</a>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
